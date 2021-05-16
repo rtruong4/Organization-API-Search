@@ -6,7 +6,7 @@ app = Flask(__name__) #Define the app
 app.config["SECRET_KEY"] = "secretkey"
 
 git_username = "rtruong4"
-git_token = "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"
+git_token = "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"
 
 
 @app.route('/data', methods=["GET", "POST"])
