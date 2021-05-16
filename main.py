@@ -5,8 +5,8 @@ import os
 app = Flask(__name__) #Define the app
 app.config["SECRET_KEY"] = "secretkey"
 
-git_username = "rtruong4"
-git_token = "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"
+git_username = os.environ["username"]
+git_token = os.environ["token"]
 
 
 @app.route('/data', methods=["GET", "POST"])
