@@ -20,6 +20,7 @@ def displayData():
 	apiURL = 'https://api.github.com/orgs/' + text
 	req = gh_session.get(apiURL).text
 	data = json.loads(req)
+	print(data)
 	membersURL = data["public_members_url"][:-9]
 	reqMembers = gh_session.get(membersURL).text
 	membersData = json.loads(reqMembers)
