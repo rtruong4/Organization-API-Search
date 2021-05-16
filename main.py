@@ -59,7 +59,7 @@ def displayData():
 
 		retData = json.dumps(sortedAuthors)
 	except:
-		retData = "GitHub API Limit Exceeded"
+		retData = data
 	return render_template('printData.html', data = retData)
 
 
