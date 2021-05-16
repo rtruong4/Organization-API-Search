@@ -20,43 +20,46 @@ def displayData():
 	apiURL = 'https://api.github.com/orgs/' + text
 	req = gh_session.get(apiURL).text
 	data = json.loads(req)
-	print(data)
-	membersURL = data["public_members_url"][:-9]
-	reqMembers = gh_session.get(membersURL).text
-	membersData = json.loads(reqMembers)
-	
-	for member in membersData:
-		memberURL = member["url"]
-		reqMember = gh_session.get(memberURL).text
-		memberData = json.loads(reqMember)
-		name = memberData["name"]
-		username = memberData["login"]
-		imageURL = memberData["avatar_url"]
-		email = memberData["email"]
+
+	try:
+		membersURL = data["public_members_url"][:-9]
+		reqMembers = gh_session.get(membersURL).text
+		membersData = json.loads(reqMembers)
 		
-		eventsURL = memberData["events_url"][:-10]
-		reqEvents = gh_session.get(eventsURL).text
-		eventsData = json.loads(reqEvents)
-		commitCount = 0
-		commitTitle = None
-		for event in eventsData:
-			if event["type"] == "PushEvent":
-				commits = event["payload"]["commits"]
-				for commit in commits:
-					if commit["author"]["name"] == name:
-						if commitCount == 0:
-							commitTitle = commit["message"]
-						commitCount += 1
+		for member in membersData:
+			memberURL = member["url"]
+			reqMember = gh_session.get(memberURL).text
+			memberData = json.loads(reqMember)
+			name = memberData["name"]
+			username = memberData["login"]
+			imageURL = memberData["avatar_url"]
+			email = memberData["email"]
+			
+			eventsURL = memberData["events_url"][:-10]
+			reqEvents = gh_session.get(eventsURL).text
+			eventsData = json.loads(reqEvents)
+			commitCount = 0
+			commitTitle = None
+			for event in eventsData:
+				if event["type"] == "PushEvent":
+					commits = event["payload"]["commits"]
+					for commit in commits:
+						if commit["author"]["name"] == name:
+							if commitCount == 0:
+								commitTitle = commit["message"]
+							commitCount += 1
 
-		obj = {"name" : name, "username" : username, "imageURL" : imageURL, "email" : email, "commitCount" : commitCount, "commitTitle" : commitTitle}
+			obj = {"name" : name, "username" : username, "imageURL" : imageURL, "email" : email, "commitCount" : commitCount, "commitTitle" : commitTitle}
 
 
-		authors.append(obj)
-		
+			authors.append(obj)
+			
 
-	sortedAuthors = sorted(authors, key = lambda k: k["commitCount"], reverse = True)
+		sortedAuthors = sorted(authors, key = lambda k: k["commitCount"], reverse = True)
 
-	retData = json.dumps(sortedAuthors)
+		retData = json.dumps(sortedAuthors)
+	except:
+		retData = "GitHub API Limit Exceeded"
 	return render_template('printData.html', data = retData)
 
 
