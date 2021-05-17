@@ -76,10 +76,12 @@ def displayData():
 
 			session["data"] = retData
 		except:
-			retData = data
+			message = data["message"]
+			obj = {"message" : message}
+			session["data"] = [obj]
 	page, per_page, offset = get_page_args(page_parameter="page",per_page_parameter="per_page")
 
-	pagination = Pagination(page=page, per_page = per_page, total=len(retData), css_framework="bootstrap4")
+	pagination = Pagination(page=page, per_page = per_page, total=len(session["data"]), css_framework="bootstrap4")
 
 	return render_template('printData.html', retData = json.dumps(getUsers(offset, per_page), indent = 2, sort_keys = True), page = page, per_page = per_page, pagination=pagination), 200
 
