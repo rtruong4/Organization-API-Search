@@ -1,7 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-	<div>
-		<p>{{data}}</p>
-	</div>
+	{{pagination.info}}
+	<table>
+		<tbody>
+			<pre>{{retData}}</pre>
+		</tbody>
+	</table>
+	{{pagination.links}}
+
+
+
 {% endblock content %}
