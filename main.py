@@ -3,13 +3,13 @@ from flask_paginate import Pagination, get_page_parameter, get_page_args
 import requests
 import json
 import os
+from dotenv import load_dotenv
 app = Flask(__name__) #Define the app
 app.config["SECRET_KEY"] = "secretkey"
 
+load_dotenv()
 git_username = os.environ["username"]
 git_token = os.environ["token"]
-# git_username = ""
-# git_token = ""
 
 def getUsers(offset=0, per_page=10):
 	return session["data"][offset: offset + per_page]
