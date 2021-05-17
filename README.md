@@ -1,5 +1,6 @@
 # Organization-API-Search
 API endpoint to search github organizations
+
 Heroku app: https://github-organization-api.herokuapp.com/
 
 Note: Requires python 3.9
