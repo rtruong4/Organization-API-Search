@@ -17,6 +17,7 @@ pipreqs==0.4.10
 pyGMs==0.1.0
 PyMySQL==1.0.2
 python-decouple==3.4
+python-dotenv==0.17.1
 requests==2.25.1
 requests-oauthlib==1.3.0
 SQLAlchemy==1.4.15
