@@ -1,5 +1,7 @@
 # Organization-API-Search
-API endpoint to search github organizations
+API endpoint to search github organizations. Retrieves information such as users, number of commits per user and user emails.
+
+Video Demonstration: https://youtu.be/bdZNjXMV73M
 
 Note: Requires python 3.9
 Instructions to run:
